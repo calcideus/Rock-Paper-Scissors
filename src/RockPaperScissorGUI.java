@@ -12,6 +12,8 @@ public class RockPaperScissorGUI extends JFrame implements ActionListener{ // so
     JLabel computerChoice;
     JLabel computerScoreLabel, playerScoreLabel;
 
+    private BackgroundPanel backgroundPanel;
+
     RockPaperScissor rockPaperScissor; //backend object
 
     public RockPaperScissorGUI(){ //to put in app class
@@ -20,6 +22,11 @@ public class RockPaperScissorGUI extends JFrame implements ActionListener{ // so
         setLayout(null); //null to disable layout management
         setLocationRelativeTo(null); // so the app is in the center of the screen
 
+        //background panel
+        backgroundPanel = new BackgroundPanel("Resource/images/angelshit.gif");
+        backgroundPanel.setLayout(null);
+        setContentPane(backgroundPanel);
+        
         //initialize the backend obj
         rockPaperScissor = new RockPaperScissor();
 
@@ -123,6 +130,26 @@ public class RockPaperScissorGUI extends JFrame implements ActionListener{ // so
         playerScoreLabel.setText("Player: " + rockPaperScissor.getPlayerScore());
 
         showDialog(result);
+    }
+
+    class BackgroundPanel extends JPanel{
+        private Image backgroundImage;
+
+        public BackgroundPanel(String imagePath){
+            try {
+                backgroundImage = new ImageIcon(imagePath).getImage();
+            } catch (Exception e) {
+                System.out.println("Background image not found");
+            }
+        }
+
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            if (backgroundImage != null){
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        }
     }
 }
 
