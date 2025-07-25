@@ -104,7 +104,7 @@ public class RockPaperScissorGUI extends JFrame implements ActionListener{ // so
 
         //scissor button
         try {
-            ImageIcon scissorIcon = new ImageIcon("Resource/images/rock.gif"); //put image icons on buttons
+            ImageIcon scissorIcon = new ImageIcon("Resource/images/scissors.gif"); //put image icons on buttons
             Image originalImage = scissorIcon.getImage();
             Image scaledImage = originalImage.getScaledInstance(80, 60, Image.SCALE_REPLICATE);
             scissorIcon = new ImageIcon(scaledImage);
