@@ -23,7 +23,7 @@ public class RockPaperScissorGUI extends JFrame implements ActionListener{ // so
         setLocationRelativeTo(null); // so the app is in the center of the screen
 
         //background panel
-        backgroundPanel = new BackgroundPanel("Resource/images/angelshit.gif");
+        backgroundPanel = new BackgroundPanel("Resource/images/bg.gif");
         backgroundPanel.setLayout(null);
         setContentPane(backgroundPanel);
         
@@ -48,6 +48,8 @@ public class RockPaperScissorGUI extends JFrame implements ActionListener{ // so
         computerChoice.setFont(new Font("Dialog", Font.PLAIN, 18));
         computerChoice.setHorizontalAlignment(SwingConstants.CENTER);
 
+        computerChoice.setOpaque(true);
+        computerChoice.setBackground(Color.WHITE);
         computerChoice.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // creates a border around '?'
         add(computerChoice);
 
@@ -57,29 +59,68 @@ public class RockPaperScissorGUI extends JFrame implements ActionListener{ // so
         playerScoreLabel.setFont(new Font("Dialog", Font.BOLD, 26));
         playerScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(playerScoreLabel);
+        
 
         //buttons
-
-        //rock buttons
-        rockButton = new JButton("Rock");
-        rockButton.setBounds(40, 387,105, 81);
-        rockButton.setFont(new Font("Dialog", Font.PLAIN, 18));
-        rockButton.addActionListener(this); //gui has the responsibility to respond whenever the action is pressed
-        add(rockButton);
+        //rock button
+        try {
+            ImageIcon rockIcon = new ImageIcon("Resource/images/rock.gif"); //put image icons on buttons
+            Image originalImage = rockIcon.getImage();
+            Image scaledImage = originalImage.getScaledInstance(80, 60, Image.SCALE_REPLICATE);
+            rockIcon = new ImageIcon(scaledImage);
+            
+            rockButton = new JButton(rockIcon); //instead of letters, connect it with the variable
+            rockButton.setBounds(40, 387,105, 81);
+            rockButton.setFont(new Font("Dialog", Font.PLAIN, 18));
+            rockButton.addActionListener(this); //gui has the responsibility to respond whenever the action is pressed
+            add(rockButton);
+        } catch (Exception e) { //if the image thing fails
+            rockButton = new JButton("Rock");
+            rockButton.setBounds(40, 387,105, 81);
+            rockButton.setFont(new Font("Dialog", Font.PLAIN, 18));
+            rockButton.addActionListener(this); //gui has the responsibility to respond whenever the action is pressed
+            add(rockButton);
+        }
 
         // paper buttons
-        paperButton = new JButton("Paper");
-        paperButton.setBounds(165, 387, 105, 81);
-        paperButton.setFont(new Font("Dialog",Font.PLAIN, 18));
-        paperButton.addActionListener(this);
-        add(paperButton);
+        try {
+            ImageIcon paperIcon = new ImageIcon("Resource/images/paper.gif"); //put image icons on buttons
+            Image originalImage = paperIcon.getImage();
+            Image scaledImage = originalImage.getScaledInstance(80, 60, Image.SCALE_REPLICATE);
+            paperIcon = new ImageIcon(scaledImage);
+
+            paperButton = new JButton(paperIcon);
+            paperButton.setBounds(165, 387, 105, 81);
+            paperButton.setFont(new Font("Dialog",Font.PLAIN, 18));
+            paperButton.addActionListener(this);
+            add(paperButton);
+        } catch (Exception e) {
+            paperButton = new JButton("Paper");
+            paperButton.setBounds(165, 387, 105, 81);
+            paperButton.setFont(new Font("Dialog",Font.PLAIN, 18));
+            paperButton.addActionListener(this);
+            add(paperButton);
+        }
 
         //scissor button
-        scissorButton = new JButton("Scissor");
-        scissorButton.setBounds(290, 387, 105, 81);
-        scissorButton.setFont(new Font("Dialog", Font.PLAIN, 18));
-        scissorButton.addActionListener(this);
-        add(scissorButton);
+        try {
+            ImageIcon scissorIcon = new ImageIcon("Resource/images/rock.gif"); //put image icons on buttons
+            Image originalImage = scissorIcon.getImage();
+            Image scaledImage = originalImage.getScaledInstance(80, 60, Image.SCALE_REPLICATE);
+            scissorIcon = new ImageIcon(scaledImage);
+
+            scissorButton = new JButton(scissorIcon);
+            scissorButton.setBounds(290, 387, 105, 81);
+            scissorButton.setFont(new Font("Dialog", Font.PLAIN, 18));
+            scissorButton.addActionListener(this);
+            add(scissorButton);
+        } catch (Exception e) {
+            scissorButton = new JButton("Scissor");
+            scissorButton.setBounds(290, 387, 105, 81);
+            scissorButton.setFont(new Font("Dialog", Font.PLAIN, 18));
+            scissorButton.addActionListener(this);
+            add(scissorButton);
+        }
 
         //showDialog("test message"); // to test showDialog()
     }
@@ -132,7 +173,7 @@ public class RockPaperScissorGUI extends JFrame implements ActionListener{ // so
         showDialog(result);
     }
 
-    class BackgroundPanel extends JPanel{
+    class BackgroundPanel extends JPanel{ // put background image
         private Image backgroundImage;
 
         public BackgroundPanel(String imagePath){
